@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using System.Management.Instrumentation;
+using System.Net;
 
 namespace CSharp_Bai9_SystemInfo
 {
@@ -64,6 +65,23 @@ namespace CSharp_Bai9_SystemInfo
                 }
             }
             lblHDD.Text = sHDDName + " - Size: " + sHDDSize.ToString() + " GB";
+
+
+            // Lấy thông tin IP
+            String strHostName = string.Empty;
+            IPHostEntry ipEntry = Dns.GetHostEntry(Dns.GetHostName());
+            IPAddress[] addr = ipEntry.AddressList;
+
+            // Xóa toàn bộ văn bản trong label IP
+            lblIP.Text = addr[2].ToString();
+
+            for (int i = 0; i < addr.Length; i++)
+            {
+                //Console.WriteLine("IP Address {0}: {1} ", i, addr[i].ToString());
+                // listBox1.Items.Add(addr[i].ToString());
+                lblIP.Text += addr[i].ToString() + "\n";
+            }
+
 
         }
 
